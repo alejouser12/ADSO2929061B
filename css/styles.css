@@ -175,7 +175,28 @@ body {
             align-items: center;
 
         }
+        section {
+           padding: 1rem;
+           h3 {
+            border-bottom: 2px dotted var(--color-2);
+           }
+           p {
+            font-size: 1.6rem;
+            margin-bottom: 0.6rem;
+            svg {
+                width: 40px;
+            }
 
+           }
+           xmp {
+            color: rgb(65, 226, 164);
+            margin-top: 0.6rem;
+            border-radius: 5px;
+            background-color: #0009; 
+            padding: 0.6rem;
+           }
+            
+        }
         menu {
             display: flex;
             flex-direction: column;
@@ -187,7 +208,7 @@ body {
             a:is(:link, :visited) {
                 border-radius: 50px;
                 align-items: center;
-                background: linear-gradient(to right, #460466, #696969);
+                background: linear-gradient(to right, #2a033b, #bef1c5);
                 color: var(--color-1);
                 display: flex;
                 padding: 0.6rem;
@@ -200,7 +221,7 @@ body {
             }
 
             a:is(:hover) {
-                background: linear-gradient(to right, #0006, #6A0999);
+                background: linear-gradient(to right, #0006, #f1f1f1);
                 transform: scale(1.05) translateY(-4px);
 
             }
