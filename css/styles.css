@@ -91,6 +91,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    flex-wrap: wrap;
 
     nav {
         position: fixed;
@@ -117,6 +118,7 @@ body {
             justify-content: center;
             flex-direction: column;
             gap: 0.6rem;
+            align-items: center;
 
             h1 {
                 display: flex;
@@ -203,12 +205,13 @@ body {
             align-items: center;
             justify-content: center;
             gap: 2rem;
-            margin-top: 1rem;
+           margin-block: 2rem;
+
 
             a:is(:link, :visited) {
                 border-radius: 50px;
                 align-items: center;
-                background: linear-gradient(to right, #2a033b, #bef1c5);
+                background: linear-gradient(to right, #030303, #f3f3f3);
                 color: var(--color-1);
                 display: flex;
                 padding: 0.6rem;
@@ -228,8 +231,8 @@ body {
 
             span {
                 border-radius: 20px;
-                background-color: var(--color-2);
-                color: var(--color-1);
+                background-color: var(--color-1);
+                color: var(--color-2);
                 font-weight: 600;
                 height: 28px;
                 display: flex;
