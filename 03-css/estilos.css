@@ -1,0 +1,160 @@
+
+body {
+    background-color: #17a053;
+}
+div.logo {
+background: url(../images/spriteweb.png) no-repeat;
+background-position: -10px -400px;
+margin: 0 auto;
+height: 190px;
+width: 190px;
+}
+menu {
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    
+}
+menu a {
+    background-color: #18542c;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 7px solid white;
+    color: white;
+    width: 200px;
+    font-family: serif;
+    font-size: large;
+    text-decoration: none;
+
+}
+menu a:hover {
+    color: yellow;
+    background-color: black;
+    border-bottom: 7px solid yellow;
+
+}
+div.parent {
+    width: 1250px;
+    height: 300px;
+    background-color: #18542c;
+    margin: auto;
+    display: flex;
+    border: 3px solid white;
+   
+}
+div.child1 {
+  
+    background-color: white;
+    width: 680px;
+    height: 200px;
+    margin: 60px;
+    background: url(../images/spriteweb.png);
+    background-position: -1300px -6px;
+    border: 3px solid white;
+
+
+}
+div.child2 {
+    width: 680px;
+    height: 200px;
+    margin: 60px;
+    background: url(../images/spriteweb.png);
+    background-position: -1300px -6px;
+    border: 3px solid white;
+
+}
+div.child3 {
+    width: 680px;
+    height: 200px;
+    margin: 60px;
+    background: url(../images/spriteweb.png);
+    background-position: -1300px -6px;
+    border: 3px solid white;
+
+}
+div.childchild1 {
+    background-color: hsl(0, 0%, 100%, 0.4);
+    height: 60px;
+    width: 290px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    font-size: 2rem;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 800;
+    cursor: pointer;
+
+}
+div.childchild2 {
+    background-color: hsl(0, 0%, 100%, 0.4);
+    height: 60px;
+    width: 290px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    font-size: 2rem;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 800;
+    cursor: pointer;
+}
+div.childchild3 {
+    background-color: hsl(0, 0%, 100%, 0.4);
+    height: 60px;
+    width: 290px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    font-size: 2rem;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 800;
+    cursor: pointer;
+}
+div.childchild1:hover {
+    background-color: hsl(0, 0%, 100%, 0.7);
+    
+    
+}
+div.childchild2:hover {
+    background-color: hsl(0, 0%, 100%, 0.7);
+}
+div.childchild3:hover {
+    background-color: hsl(0, 0%, 100%, 0.7);
+}
+section {
+    width: 1250px;
+    height: 960px;
+    background-color: #18542c;
+    margin: auto;
+    margin: auto;
+    padding: 1.5rem;
+   
+}
+div.box1 {
+    width: 1230px;
+    height: 300px;
+    background-color: white;
+    margin: auto;
+    
+
+}
+div.box2 {
+    width: 1230px;
+    height: 300px;
+    background-color: white;
+    margin: auto;
+}
+div.box3 {
+    width: 1230px;
+    height: 300px;
+    background-color: white;
+    margin: auto;
+}
+p {
+    font-weight: 800;
+    font-size: larger;
+    font-family: 'Times New Roman', Times, serif;
+    line-height: 3rem;
+}
