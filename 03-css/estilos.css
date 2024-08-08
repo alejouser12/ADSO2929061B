@@ -54,8 +54,7 @@ div.child1 {
     background: url(../images/spriteweb.png);
     background-position: -1300px -6px;
     border: 3px solid white;
-
-
+    cursor: pointer;
 }
 div.child2 {
     width: 680px;
@@ -113,9 +112,7 @@ div.childchild3 {
     cursor: pointer;
 }
 div.childchild1:hover {
-    background-color: hsl(0, 0%, 100%, 0.7);
-    
-    
+    background-color: hsl(0, 0%, 100%, 0.7);    
 }
 div.childchild2:hover {
     background-color: hsl(0, 0%, 100%, 0.7);
@@ -125,7 +122,7 @@ div.childchild3:hover {
 }
 section {
     width: 1250px;
-    height: 960px;
+    height: px;
     background-color: #18542c;
     margin: auto;
     margin: auto;
@@ -137,6 +134,7 @@ div.box1 {
     height: 300px;
     background-color: white;
     margin: auto;
+    display: flex;
     
 
 }
@@ -145,16 +143,73 @@ div.box2 {
     height: 300px;
     background-color: white;
     margin: auto;
+    display: flex;
 }
 div.box3 {
     width: 1230px;
     height: 300px;
     background-color: white;
     margin: auto;
+    display: flex;
 }
 p {
     font-weight: 800;
     font-size: larger;
     font-family: 'Times New Roman', Times, serif;
     line-height: 3rem;
+}
+footer {
+    background-color: white;
+    height: 200px;
+    width: 1290px;
+    margin: auto;
+    display: flex;
+    gap: 6rem;
+}
+footer.footer1 {
+    background-color: white;
+    height:50px;
+    width: 1290px;
+    margin: auto;
+    display: flex;
+}
+footer img {
+    width: 200px;
+    height: 150px;
+    margin: auto;
+}
+
+div.footer {
+    padding: 4px;
+    font-weight: 600;
+    font-size: larger;
+    font-family: Arial, Helvetica, sans-serif; 
+    text-decoration: none;
+   width: 150px;
+   height: 20px;
+   margin-bottom: auto;
+   margin-left: 1.2rem;
+   cursor: pointer;
+}
+
+div.footer:hover {
+    border-bottom: 7px solid green;
+}
+p:hover {
+    color: #18542c;
+    cursor: pointer;
+}
+div.lata  {
+    background: url(../images/logolata.png) no-repeat;
+    height: 165px;
+    width: 100px;
+    margin-top: 3rem;
+}
+div.circle {
+    background: url(../images/spriteradio.png) no-repeat;
+    width: 90px;
+    height:80px;
+    margin-top: 3rem;
+    border: 2px solid white;
+
 }
