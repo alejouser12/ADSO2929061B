@@ -179,6 +179,10 @@ body {
         section {
             margin-inline: auto;
             padding: 1rem;
+            margin-inline: auto;
+            margin-block: 1rem;
+            width: 400px;
+            text-align: center;
 
             h3 {
                 border-bottom: 2px dotted var(--color-2);

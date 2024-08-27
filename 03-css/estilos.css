@@ -51,7 +51,7 @@ div.child1 {
     width: 680px;
     height: 200px;
     margin: 60px;
-    background: url(../images/spriteweb.png);
+    background: url(../Images/spriteweb.png);
     background-position: -1300px -6px;
     border: 3px solid white;
     cursor: pointer;
@@ -60,7 +60,7 @@ div.child2 {
     width: 680px;
     height: 200px;
     margin: 60px;
-    background: url(../images/spriteweb.png);
+    background: url(../Images/spriteweb.png);
     background-position: -1300px -6px;
     border: 3px solid white;
 
@@ -69,7 +69,7 @@ div.child3 {
     width: 680px;
     height: 200px;
     margin: 60px;
-    background: url(../images/spriteweb.png);
+    background: url(../Images/spriteweb.png);
     background-position: -1300px -6px;
     border: 3px solid white;
 
@@ -200,13 +200,13 @@ p:hover {
     cursor: pointer;
 }
 div.lata  {
-    background: url(../images/logolata.png) no-repeat;
+    background: url(../Images/logolata.png) no-repeat;
     height: 165px;
     width: 100px;
     margin-top: 3rem;
 }
 div.circle {
-    background: url(../images/spriteradio.png) no-repeat;
+    background: url(../Images/spriteradio.png) no-repeat;
     width: 90px;
     height:80px;
     margin-top: 3rem;
