@@ -3,28 +3,242 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>39-challenge-responsive</title>
-     <link rel="stylesheet" href="../css/styles.css">
-</head>
-<body class="css"> 
-     <nav>
-        <a href="index.html">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#ffffff" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg> 
-    
-        </a>
-     </nav>
-    <main>
-        <header>
-            <h1>39-challenge-responsive</h1>
-            <p>
-                Solved
-            </p>
-        </header>
-        <section>
-            
+    <title>39- challenge-responsive</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Freeman&display=swap');
 
-        </section>
-       
+        body{
+            background: url(..//Images/fondo.jpeg);
+            font-family: "Freeman", sans-serif;
+        }
+        main {
+            width: auto;
+            background: url(images/fondo.jpg) ;
+            justify-content: center;
+        }
+        
+        header {
+            justify-content: center;
+            align-items: center;
+            display: flex;
+
+        }
+        
+        figure.logo {
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            margin: 0;
+        }
+
+        figure.logo img {
+            width: 100%;
+            height: 100%;
+        }
+        
+        nav.villanos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 1200px;
+            margin: auto;
+            gap: 50px;
+        }
+        
+        div.villano {
+            height: 250px;
+            width: 250px;
+            border: 2px solid  white;
+            position: relative;
+            transition: all 0.7s ease-in;
+            border-radius: 5px;
+        }
+
+        div.villanobject {
+            transform: scale(1.2);
+        }
+
+        div.anim {
+            height: 20%;
+            background-color: #ffffff94;
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            text-align: center;
+            font-size: 1rem;
+            font-weight: 800;
+            transition: all 0.34s ease-in;
+        }
+
+        div.anim:hover {
+            height: 25%;
+        }
+
+        nav.heroes {
+            align-items: center;
+            justify-content: center;
+            width: 1180px;
+            margin: 40px  auto;
+            height: 400px;
+        }
+
+        div.heroe {
+            height: 250px;
+            width: 98%;
+            margin: 40px auto;
+            background-color: rgba(255, 255, 255, 0.818);
+            border: 2px white dotted;
+            display: flex;
+            border-radius: 5px;
+            
+        }
+
+        div.img {
+            width: 300px;
+            height: 100%;
+        }
+
+        div.texto {
+            width: 80%;
+            height: 100%;
+            padding: 35px;
+        }
+
+        div.texto h2 {
+            top: 0;
+        }
+
+        div.texto p {
+            text-align: start;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 1024px) {
+          figure.logo {
+            transform: scale(0.8);
+          }
+
+          nav.villanos {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            width: 550px;
+            margin: auto;
+            height: 600px;
+            }
+
+          nav.heroes {
+            align-items: center;
+            justify-content: center;
+            width: 550px;
+            margin: 40px  auto;
+            height: 400px;
+          }
+
+          div.heroe {
+            width: 100%;
+          }
+
+          div.img {
+            width: 250px;
+            height: 100%;
+          }
+
+          div.texto {
+            width: 55%;
+          }
+
+          div.texto {
+            overflow-y: scroll;
+            box-sizing: border-box;
+          }
+        }
+
+        @media (max-width: 690px) {
+            figure.logo {
+                transform: scale(0.7);
+            }
+
+            nav.villanos {
+                height: auto;
+                display: list-item;
+                justify-content: center;
+                align-items: center;
+                width: 250px;
+            }
+
+            div.villano {
+                margin: 30px auto;
+            }
+
+            nav.heroes {
+                width: 250px;
+                height: 1000px;
+            }
+
+            div.heroe {
+                display: block;
+                height: 500px;
+            }
+
+            div.img {
+                width: 250px;
+                height: 250px;
+                margin: 0;
+            }
+
+            div.texto {
+                height: 220px;
+                width: 250px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <main>
+    <header>
+        <figure class="logo">
+            <img src="..//Images/logojjk.jpg" class="logo">
+        </figure>
+    </header>
+    <section>
+        <nav class="villanos">
+            <div class="villano sonic">
+                <img src="..//Images/gojo.jpeg" width="250px" height="250px">
+                <div class="anim"><p>GOJO</p></div>
+            </div>
+            <div class="villano suiryu">
+                <img src="..//Images/itadori.jpeg" width="250px" height="250px">
+                <div class="anim"><p>ITADORI</p></div>
+            </div>
+            <div class="villano garou">
+                <img src="..//Images/yuta.jpg" width="250px" height="250px">
+                <div class="anim"><p>YUTA</p></div>
+            </div>
+            <div class="villano tatsumaki">
+                <img src="..//Images/sukuna.jpeg" width="250px" height="250px">
+                <div class="anim"><p>SUKUNA</p></div>
+            </div>
+        </nav>
+        <nav class="heroes">
+            <div class="heroe saitama">
+                <img src="..//Images/gojo2.jpeg" width="250px"
+                height="250px">
+                <div class="texto">
+                    <h2>GOJO</h2>
+                    <p>Gojo Satoru es uno de los personajes principales de "Jujutsu Kaisen". Es un poderoso hechicero jujutsu y profesor en la Escuela Jujutsu de Tokio. Con su cabello blanco y sus ojos azules, Gojo es conocido por su personalidad carismática y su confianza desmedida en sus habilidades. Posee técnicas excepcionales, como el "Infinito", que le permite manipular el espacio y el tiempo en combate. A pesar de su actitud despreocupada, tiene un fuerte sentido de justicia y se preocupa por sus estudiantes. Su carisma y poder lo convierten en un personaje central y fascinante en la serie.</p>
+                </div>
+            </div>
+            <div class="heroe genos">
+                <img src="..//Images/sukuna2.jpeg" width="250px"
+                height="250px">
+                <div class="texto">
+                    <h2>SUKUNA</h2>
+                    <p>Ryomen Sukuna es uno de los antagonistas principales de "Jujutsu Kaisen". Originalmente un poderoso hechicero jujutsu de la era Heian, se convirtió en un ser temido y venerado, conocido como el Rey de las Maldiciones. Sukuna tiene un aspecto distintivo, con cuatro brazos y un rostro feroz, y su personalidad es despiadada y egoísta. A lo largo de la serie, reside dentro de Yuji Itadori, el protagonista, lo que le permite interactuar con el mundo moderno. A pesar de su naturaleza malévola, Sukuna también muestra un interés peculiar en los desafíos y en la lucha, lo que añade una capa compleja a su carácter. Su poder y su historia lo convierten en una figura clave en la trama.</p>
+                </div>
+            </div>
+        </nav>
+    </section>
     </main>
 </body>
 </html>
