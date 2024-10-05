@@ -193,7 +193,7 @@ div.footer {
 }
 
 div.footer:hover {
-    border-bottom: 7px solid green;
+    border-bottom: 7px solid green; 
 }
 p:hover {
     color: #18542c;
