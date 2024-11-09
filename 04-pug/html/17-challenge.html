@@ -5,18 +5,95 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Template</title>
     <link rel="stylesheet" href="/css/styles.css">
+    <style>
+      body {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+          margin: 0;
+          font-family: Arial, sans-serif;
+          background-color: #919A08;
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 800 800'%3E%3Cg fill='none' stroke='%23074444' stroke-width='1'%3E%3Cpath d='M769 229L1037 260.9M927 880L731 737 520 660 309 538 40 599 295 764 126.5 879.5 40 599-197 493 102 382-31 229 126.5 79.5-69-63'/%3E%3Cpath d='M-31 229L237 261 390 382 603 493 308.5 537.5 101.5 381.5M370 905L295 764'/%3E%3Cpath d='M520 660L578 842 731 737 840 599 603 493 520 660 295 764 309 538 390 382 539 269 769 229 577.5 41.5 370 105 295 -36 126.5 79.5 237 261 102 382 40 599 -69 737 127 880'/%3E%3Cpath d='M520-140L578.5 42.5 731-63M603 493L539 269 237 261 370 105M902 382L539 269M390 382L102 382'/%3E%3Cpath d='M-222 42L126.5 79.5 370 105 539 269 577.5 41.5 927 80 769 229 902 382 603 493 731 737M295-36L577.5 41.5M578 842L295 764M40-201L127 80M102 382L-261 269'/%3E%3C/g%3E%3Cg fill='%23553708'%3E%3Ccircle cx='769' cy='229' r='5'/%3E%3Ccircle cx='539' cy='269' r='5'/%3E%3Ccircle cx='603' cy='493' r='5'/%3E%3Ccircle cx='731' cy='737' r='5'/%3E%3Ccircle cx='520' cy='660' r='5'/%3E%3Ccircle cx='309' cy='538' r='5'/%3E%3Ccircle cx='295' cy='764' r='5'/%3E%3Ccircle cx='40' cy='599' r='5'/%3E%3Ccircle cx='102' cy='382' r='5'/%3E%3Ccircle cx='127' cy='80' r='5'/%3E%3Ccircle cx='370' cy='105' r='5'/%3E%3Ccircle cx='578' cy='42' r='5'/%3E%3Ccircle cx='237' cy='261' r='5'/%3E%3Ccircle cx='390' cy='382' r='5'/%3E%3C/g%3E%3C/svg%3E");
+      }
+      section {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+      }
+      
+      table {
+          width: 200px;
+          border-collapse: collapse;
+          margin-top: auto;
+          margin-bottom: auto;
+          
+      }
+      
+      td {
+          height: 50px;
+          color: white;
+          text-align: center;
+          font-size: 1.5em;
+      }
+      
+      tr:nth-child(1) { background-color: #007a8a; }
+      tr:nth-child(2) { background-color: #0097a7; }
+      tr:nth-child(3) { background-color: #00acc1; }
+      tr:nth-child(4) { background-color: #00bcd4; }
+      tr:nth-child(5) { background-color: #26c6da; }
+      tr:nth-child(6) { background-color: #4dd0e1; }
+      tr:nth-child(7) { background-color: #80deea; }
+      tr:nth-child(8) { background-color: #b3e5fc; }
+      tr:nth-child(9) { background-color: #d7effc; }
+      tr:nth-child(10) { background-color: #e1f5fe; }
+      
+    </style>
   </head>
-  <body class="pug"> 
+  <body>
     <nav>   <a href="../index.html">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
-          <path path d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"></path>
+          <path d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"></path>
         </svg></a></nav>
     <main>  
       <header> 
-        <h1>Teemplate </h1>
-        <p>Lorem</p>
+        <h1>17-challenge </h1>
+        <p>Provides an exercise to apply the learned concepts.</p>
       </header>
-      <section></section>
+      <section>
+        <table>
+          <tr>
+            <td>1.</td>
+          </tr>
+          <tr>
+            <td>2.</td>
+          </tr>
+          <tr>
+            <td>3.</td>
+          </tr>
+          <tr>
+            <td>4.</td>
+          </tr>
+          <tr>
+            <td>5.</td>
+          </tr>
+          <tr>
+            <td>6.</td>
+          </tr>
+          <tr>
+            <td>7.</td>
+          </tr>
+          <tr>
+            <td>8.</td>
+          </tr>
+          <tr>
+            <td>9.</td>
+          </tr>
+          <tr>
+            <td>10.</td>
+          </tr>
+        </table>
+      </section>
     </main>
   </body>
 </html>
