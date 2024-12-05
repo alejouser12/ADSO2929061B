@@ -3,28 +3,194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>01-portfolio</title>
-    <link rel="stylesheet" href="../../css/styles.css">
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <title>Alejandro Florez - Web Designer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+        }
+        .navbar {
+            background-color: #e0e0e0;
+        }
+        .hero {
+            background-color: #d6d6d6;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+        }
+        .hero img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        .hero p {
+            font-size: 1rem;
+            color: #666;
+        }
+        .btn-dark {
+            background-color: #333;
+            color: #fff;
+            border: none;
+        }
+        .about {
+            padding: 60px 0;
+            position: relative;
+        }
+        .about img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            display: block;
+            margin: 0 auto 20px;
+        }
+        .progress {
+            height: 15px;
+            border-radius: 10px;
+        }
+        .progress-bar {
+            background-color: #333;
+        }
+        .services .card {
+            background: #f8f8f8;
+            border: none;
+            padding: 20px;
+            text-align: center;
+        }
+        .portfolio img {
+            width: 100%;
+            height: auto;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        footer {
+            background-color: #d6d6d6;
+            padding: 20px;
+            text-align: center;
+        }
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #666;
+        }
+    </style>
 </head>
-<body class="bootstrap">
-    <nav>
-        <a href="../index.html">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="#ffffff" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
-        </a>
+<body>
+
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="#"><strong>Alejando Florez</strong></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#portfolio">Portafolio</a></li>
+                </ul>
+            </div>
+        </div>
     </nav>
-    <main>
-        <header>
-            <h1>01-portfolio</h1>
-            <p>
-                Personal Portfolio
-            </p>
-        </header>
-        <section>
-            
-        </section>
-    </main>
-    <script src="../06-bootstrap/js/bootstrap.min.js"></script>
-    <script src="../06-bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <section class="hero">
+        <div class="container">
+            <img src="https://w1.pngwing.com/pngs/860/49/png-transparent-circle-silhouette-user-user-interface-user-profile-black-black-and-white-line.png" alt="Profile Picture">
+            <h1>Hello, I am Alejandro Florez Correa</h1>
+            <p>Profesional Freelance Web Designer</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <button class="btn btn-dark mt-3">Hire Me</button>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container text-center">
+            <img src="https://w1.pngwing.com/pngs/860/49/png-transparent-circle-silhouette-user-user-interface-user-profile-black-black-and-white-line.png" alt="About Picture">
+            <h2>Why You Hire Me?</h2>
+            <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label>UI/UX Design</label>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 40%;"></div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label>Web Design</label>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 20%;"></div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label>HTML/CSS</label>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 80%;"></div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label>Sketch</label>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 50%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="services py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Services I Provide</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="https://static.vecteezy.com/system/resources/previews/011/391/185/non_2x/pen-tool-icon-vector.jpg" alt="Service 1" class="mx-auto d-block mb-3" style="width: 50px;">
+                        <h5>Graphic Design</h5>
+                        <p>Lorem ipsum dolor sit amet.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="https://static.vecteezy.com/system/resources/previews/011/391/185/non_2x/pen-tool-icon-vector.jpg" alt="Service 2" class="mx-auto d-block mb-3" style="width: 50px;">
+                        <h5>Web Design</h5>
+                        <p>Lorem ipsum dolor sit amet.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="https://static.vecteezy.com/system/resources/previews/011/391/185/non_2x/pen-tool-icon-vector.jpg" alt="Service 3" class="mx-auto d-block mb-3" style="width: 50px;">
+                        <h5>UI/UX Design</h5>
+                        <p>Lorem ipsum dolor sit amet.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="portfolio py-5">
+        <div class="container text-center">
+            <h2>Latest Projects</h2>
+            <div class="row g-4">
+                <div class="col-md-4"><img src="https://us.123rf.com/450wm/viktostock/viktostock2004/viktostock200402837/144537041-icono-relacionado-con-la-fotograf%C3%ADa-en-el-fondo-para-dise%C3%B1o-gr%C3%A1fico-y-web-s%C3%ADmbolo-de-concepto-de.jpg?ver=6" alt="Project 1"></div>
+                <div class="col-md-4"><img src="https://us.123rf.com/450wm/viktostock/viktostock2004/viktostock200402837/144537041-icono-relacionado-con-la-fotograf%C3%ADa-en-el-fondo-para-dise%C3%B1o-gr%C3%A1fico-y-web-s%C3%ADmbolo-de-concepto-de.jpg?ver=6" alt="Project 2"></div>
+                <div class="col-md-4"><img src="https://us.123rf.com/450wm/viktostock/viktostock2004/viktostock200402837/144537041-icono-relacionado-con-la-fotograf%C3%ADa-en-el-fondo-para-dise%C3%B1o-gr%C3%A1fico-y-web-s%C3%ADmbolo-de-concepto-de.jpg?ver=6" alt="Project 3"></div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>alejandro_florezc@soysena.edu.co</p>
+            <p>&copy; All rights reserved 2024</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
