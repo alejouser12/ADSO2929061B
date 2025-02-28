@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/tailwind.js"></script>
+    <title>Jujutsu Kaisen App</title>
+    <style>
+        a {
+            border-radius: 4px;
+            background-color: #e63946;
+            color: #fff;
+            padding: 0.5rem 2rem;
+            display: inline-block;
+            margin-top: 1rem;
+            transition: background 0.3s;
+        }
+        a:hover {
+            background-color: #d62828;
+        }
+
+        #section01,
+        #section02,
+        #section03 {
+            position: absolute;
+            transition: all 0.5s ease-in;
+            transform: translateX(-200%);
+            width: 90%;
+            max-width: 400px;
+            left: 50%;
+            transform: translate(-50%, -200%);
+        }
+
+        #section01:target,
+        #section02:target,
+        #section03:target {
+            transform: translate(-50%, 0);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 flex justify-center items-center flex-col min-h-screen relative">
+  
+  <div class="p-6 bg-gray-800 text-white w-11/12 max-w-md h-[500px] rounded-lg shadow-xl text-center border-4 border-red-500" id="section01">
+      <img src="../Images/jjk.jpg" alt="Welcome" class="w-full rounded mb-4">
+      <h1 class="text-4xl font-extrabold text-red-400">Jujutsu Kaisen</h1>
+      <p class="text-gray-300">Enter the world of Jujutsu Sorcery and explore the battles between sorcerers and curses.</p>
+      <p class="text-gray-400 text-sm">Discover powerful techniques, legendary fights, and the path of Yuji Itadori.</p>
+      <a href="#section02">Next</a>
+  </div>
+  
+  <div class="p-6 bg-gray-800 text-white w-11/12 max-w-md h-[500px] rounded-lg shadow-xl text-center border-4 border-blue-500" id="section02">
+      <img src="../Images/gojo.jpeg" alt="Episodes" class="w-full rounded mb-4">
+      <h2 class="text-3xl font-bold text-blue-400">Season 1 - Episodes</h2>
+      <p class="text-gray-300">Follow the journey of Yuji Itadori as he learns the ways of Jujutsu Sorcery.</p>
+      <p class="text-gray-400 text-sm">Experience the battles against powerful curses and the mysteries behind Sukuna's power.</p>
+      <a href="#section01">Prev</a>
+      <a href="#section03">Next</a>
+  </div>
+  
+  <div class="p-6 bg-gray-800 text-white w-11/12 max-w-md h-[500px] rounded-lg shadow-xl text-center border-4 border-purple-500" id="section03">
+      <img src="../Images/gojo2.jpeg" alt="Characters" class="w-full rounded mb-4">
+      <h2 class="text-3xl font-bold text-purple-400">Choose Your Character</h2>
+      <p class="text-gray-300">Select your favorite Jujutsu Sorcerer and learn their special abilities.</p>
+      <p class="text-gray-400 text-sm">From Gojo Satoru's Limitless to Megumi's Ten Shadows Technique, explore them all.</p>
+      <a href="#section02">Prev</a>
+  </div>
+  
+  <a href="#section01" class="mt-4">Start</a>
+  
+</body>
+</html>
