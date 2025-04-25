@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>13-challenge-calculator</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+      
+        body.js main section {
+            background-color: rgb(130, 199, 190);
+            border-radius: 4px;
+            margin-block: 1rem;
+            min-height: 25vh;
+            width: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+       
+        .calculator {
+            background: #000;
+            width: 100%;
+            max-width: 350px;
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.3);
+            border: 2px solid #ff0000;
+            position: relative;
+        }
+
+        .sukuna-symbol {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            color: #ff0000;
+            font-size: 24px;
+            z-index: 1;
+        }
+
+        .header {
+            background: #220000;
+            border-radius: 10px;
+            padding: 15px 20px;
+            margin: 40px 0 15px;
+            position: relative;
+            border: 1px solid #ff0000;
+        }
+
+        .mode {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #4a0000;
+            border: 1px solid #ff0000;
+            color: #ff4444;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+
+        .mode:hover {
+            background: #ff0000;
+            color: #000;
+        }
+
+        .oper {
+            background: transparent;
+            border: none;
+            color: #ff4444;
+            width: 100%;
+            text-align: right;
+            font-size: 1.1em;
+            margin-bottom: 8px;
+            pointer-events: none;
+            height: 20px;
+        }
+
+        .result {
+            color: #ff4444;
+            font-size: 2.2em;
+            text-align: right;
+            margin: 0;
+            min-height: 60px;
+            letter-spacing: -1px;
+            text-shadow: 0 0 10px rgba(255, 26, 26, 0.3);
+        }
+
+        footer {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+            padding: 5px;
+        }
+
+        footer button {
+            background: #2a2a2a;
+            color: #fff;
+            border: 1px solid rgba(255, 0, 0, 0.2);
+            padding: 0;
+            font-size: 1.2em;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            aspect-ratio: 1/1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+        }
+
+        footer button:hover {
+            background: #ff4444;
+            transform: scale(1.03);
+            box-shadow: 0 0 8px rgba(255, 0, 0, 0.2);
+        }
+
+        .operator {
+            background: #5a0000 !important;
+            font-size: 1.3em;
+        }
+
+        .equals {
+            background: #ff0000 !important;
+            grid-column: span 2;
+            aspect-ratio: unset;
+        }
+
+        footer button[data-num="0"] {
+            grid-column: span 2;
+            aspect-ratio: unset;
+        }
+
+        
+        [data-theme="light"] .calculator {
+            background: #f0f0f0;
+            border-color: #cc0000;
+            box-shadow: 0 0 30px rgba(204, 0, 0, 0.2);
+        }
+
+        [data-theme="light"] .header {
+            background: #ffe5e5;
+            border-color: #cc0000;
+        }
+
+        [data-theme="light"] .oper,
+        [data-theme="light"] .result {
+            color: #cc0000;
+        }
+
+        [data-theme="light"] footer button {
+            background: #e0e0e0;
+            color: #333;
+            border-color: rgba(204, 0, 0, 0.2);
+        }
+
+        [data-theme="light"] .operator {
+            background: #ffcccc !important;
+            color: #5a0000;
+        }
+
+        [data-theme="light"] .equals {
+            background: #cc0000 !important;
+        }
+
+        [data-theme="light"] .mode {
+            background: #ffd4d4;
+            border-color: #cc0000;
+            color: #cc0000;
+        }
+    </style>
+</head>
+<body class="js">
+    <nav>
+        <a href="index.html">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="#ffffff" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
+        </a>
+    </nav>
+    <main>
+        <header>
+            <h1>Sukuna Calculator</h1>
+            <p>Malevolent Shrine Calculation</p>
+        </header>
+        <section>
+            <div class="calculator">
+                <div class="sukuna-symbol">卍</div>
+                <header class="header">
+                    <button class="mode">☀</button>
+                    <input type="text" class="oper" value="" readonly>
+                    <h4 class="result">0</h4>
+                </header>
+                <footer>
+                    <button class="operator" data-action="clear">C</button>
+                    <button class="operator" data-action="delete">⌫</button>
+                    <button class="operator" data-opr="%">%</button>
+                    <button class="operator" data-opr="/">÷</button>
+                    <button data-num="7">7</button>
+                    <button data-num="8">8</button>
+                    <button data-num="9">9</button>
+                    <button class="operator" data-opr="*">×</button>
+                    <button data-num="4">4</button>
+                    <button data-num="5">5</button>
+                    <button data-num="6">6</button>
+                    <button class="operator" data-opr="-">-</button>
+                    <button data-num="1">1</button>
+                    <button data-num="2">2</button>
+                    <button data-num="3">3</button>
+                    <button class="operator" data-opr="+">+</button>
+                    <button data-num="0" style="grid-column: span 2;">0</button>
+                    <button data-num=".">.</button>
+                    <button class="equals" data-action="calculate">=</button>
+                </footer>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        class SukunaCalculator {
+            constructor() {
+                this.oper = document.querySelector('.oper');
+                this.result = document.querySelector('.result');
+                this.currentOperand = '0';
+                this.previousOperand = '';
+                this.operation = null;
+                this.waitingForSecondOperand = false;
+                this.updateDisplay();
+            }
+
+            clear() {
+                this.currentOperand = '0';
+                this.previousOperand = '';
+                this.operation = null;
+                this.waitingForSecondOperand = false;
+                this.updateDisplay();
+            }
+
+            delete() {
+                this.currentOperand = this.currentOperand.toString().slice(0, -1);
+                if (this.currentOperand === '') this.currentOperand = '0';
+                this.updateDisplay();
+            }
+
+            appendNumber(num) {
+                if (num === '.' && this.currentOperand.includes('.')) return;
+                
+                if (this.waitingForSecondOperand) {
+                    this.currentOperand = num;
+                    this.waitingForSecondOperand = false;
+                } else {
+                    this.currentOperand = this.currentOperand === '0' ? num : this.currentOperand + num;
+                }
+                
+                this.updateDisplay();
+            }
+
+            chooseOperation(op) {
+                if (this.currentOperand === '0') return;
+                
+                if (this.operation && !this.waitingForSecondOperand) {
+                    this.compute();
+                }
+                
+                this.operation = op;
+                this.previousOperand = this.currentOperand;
+                this.waitingForSecondOperand = true;
+                this.updateDisplay();
+            }
+
+            compute() {
+                if (this.operation === null || this.waitingForSecondOperand) return;
+                
+                const prev = parseFloat(this.previousOperand);
+                const current = parseFloat(this.currentOperand);
+                let computation;
+                
+                try {
+                    switch(this.operation) {
+                        case '+': computation = prev + current; break;
+                        case '-': computation = prev - current; break;
+                        case '*': computation = prev * current; break;
+                        case '/': 
+                            if (current === 0) throw new Error('Domain Expansion!');
+                            computation = prev / current;
+                            break;
+                        case '%': computation = prev % current; break;
+                    }
+                    
+                    this.currentOperand = Number.isInteger(computation) 
+                        ? computation.toString()
+                        : computation.toFixed(4).replace(/\.?0+$/, '');
+                } catch (error) {
+                    this.currentOperand = error.message;
+                }
+                
+                this.operation = null;
+                this.updateDisplay();
+            }
+
+            updateDisplay() {
+                this.result.textContent = this.currentOperand;
+                this.oper.value = `${this.previousOperand} ${this.operation || ''}`;
+            }
+        }
+
+        const calculator = new SukunaCalculator();
+        const calcElement = document.querySelector('.calculator');
+        const modeBtn = document.querySelector('.mode');
+
+       
+        document.querySelectorAll('[data-num]').forEach(button => {
+            button.addEventListener('click', () => calculator.appendNumber(button.dataset.num));
+        });
+
+        document.querySelectorAll('[data-opr]').forEach(button => {
+            button.addEventListener('click', () => calculator.chooseOperation(button.dataset.opr));
+        });
+
+        document.querySelector('[data-action="clear"]').addEventListener('click', () => calculator.clear());
+        document.querySelector('[data-action="delete"]').addEventListener('click', () => calculator.delete());
+        document.querySelector('[data-action="calculate"]').addEventListener('click', () => calculator.compute());
+
+       
+        function toggleTheme() {
+            const theme = calcElement.dataset.theme === 'light' ? 'dark' : 'light';
+            calcElement.dataset.theme = theme;
+            modeBtn.textContent = theme === 'light' ? '☾' : '☀';
+            localStorage.setItem('sukunaTheme', theme);
+        }
+
+        modeBtn.addEventListener('click', toggleTheme);
+
+       
+        const savedTheme = localStorage.getItem('sukunaTheme') || 'dark';
+        calcElement.dataset.theme = savedTheme;
+        modeBtn.textContent = savedTheme === 'light' ? '☾' : '☀';
+
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key >= '0' && e.key <= '9' || e.key === '.') calculator.appendNumber(e.key);
+            if (['+', '-', '*', '/', '%'].includes(e.key)) calculator.chooseOperation(e.key);
+            if (e.key === 'Enter') calculator.compute();
+            if (e.key === 'Escape') calculator.clear();
+            if (e.key === 'Backspace') calculator.delete();
+        });
+    </script>
+</body>
+</html>
