@@ -351,6 +351,10 @@
             if (e.key === 'Escape') calculator.clear();
             if (e.key === 'Backspace') calculator.delete();
         });
+
+        document.addEventListener('keyup', function(e) {
+            console.log(e.keyCode)
+        })
     </script>
 </body>
 </html>

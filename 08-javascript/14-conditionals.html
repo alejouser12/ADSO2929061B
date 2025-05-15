@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>00-TEMPLATE</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+  <style>
+    p.answer {
+      padding: 0.4rem;
+    }
+
+    p.answer.success {
+      color: white;
+      background-color: blue;
+    }
+
+    p.answer.error {
+      color: white;
+      background-color: red;
+    }
+
+    p.today, p.year {
+      background-color: #ead64d;
+      padding: 0.4rem;
+      text-align: center;
+    }
+    button {
+        background-color: white;
+        border: none;
+        border-radius: 4px;
+        display: flex;
+        margin: 0 auto;
+        cursor: pointer;
+        padding: 0.4rem  1rem;
+        transition: transform 0.2s ease-in;
+        &:hover {
+            transform: scale(1.2);
+        }
+    }
+  </style>
+</head>
+<body class="js">
+  <nav>
+    <a href="index.html">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+        <path fill="#ffffff" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/>
+      </svg>
+    </a>
+  </nav>
+
+  <main>
+    <header>
+      <h1>14-conditionals</h1>
+      <p>Control program flow with conditional statements.</p>
+    </header>
+    <section>
+      <h3>If - Else:</h3>
+      <h4>How much is: 2048/512 ?</h4>
+      <button class="btn">Lunch question</button>
+      <p class="answer"></p>
+      
+      <h3>Switch:</h3>
+      <p class="today"></p>
+      
+      <h3>Ternary operator</h3>
+      <p class="year"></p>
+    </section>
+  </main>
+
+  <script>
+    // If - Else
+    const btn = document.querySelector('.btn')
+    const answer = document.querySelector('.answer');
+    const res = prompt('How many is: 2048/512 ?');
+
+    btn.addEventListener('click', (e) => {
+        challenge
+    }) 
+
+    if (res !== null && res.trim() !== '') {
+      const numericRes = Number(res);
+      if (numericRes === 4) {
+        answer.textContent = `(${res}) => Congratulations, it's correct ✅`;
+        answer.classList.add('success');
+      } else {
+        answer.textContent = `(${res}) => Sorry, it's incorrect ❌`;
+        answer.classList.add('error');
+      }
+    } else {
+      answer.textContent = `No response given ❌`;
+      answer.classList.add('error');
+    }
+
+    // Switch
+    const today = document.querySelector('.today');
+    const date = new Date();
+    switch (date.getDay()) {
+      case 1:
+        today.textContent = `Today is Monday`;
+        break;
+      case 2:
+        today.textContent = `Today is Tuesday`;
+        break;
+      case 3:
+        today.textContent = `Today is Wednesday`;
+        break;
+      case 4:
+        today.textContent = `Today is Thursday`;
+        break;
+      case 5:
+        today.textContent = `Today is Friday`;
+        break;
+      case 6:
+      case 0:
+        today.textContent = `Today is Weekend`;
+        break;
+      default:
+        today.textContent = `Unknown day`;
+        break;
+    }
+
+    // Ternary operator
+    const year = document.querySelector('.year');
+    const datef = new Date('2024-10-10');
+    const isLeapYear = datef.getFullYear() % 4 === 0 ? 'True✅' : 'False❌';
+     year.textContent = `${datef.getFullYear()} => Is Leap Year: ${isLeapYear}`;
+  </script>
+</body>
+</html>
