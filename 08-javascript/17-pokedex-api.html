@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>17-Pokedex-api</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins';
+        }
+
+        
+            @keyframes girar {
+                from { transform: rotate(0deg); }
+                to   { transform: rotate(360deg); }
+        }
+        .rotacion {
+            animation: girar 1s linear 0.35s 8;
+        }
+        
+        section {
+
+            background-color: transparent !important;
+        }
+        
+        
+        .pokedesk {
+            
+            margin: auto;
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+            width: 100%;
+            
+        }
+        section {
+            display: flex;
+        }
+        .home {
+            transition: left 0.4s ease;
+            padding-block: 50px;
+            position: relative;
+            z-index: 4;
+            background-color: #1D2C5E; 
+            
+            .logo {
+                width: 350px;
+            }
+            
+            .started {
+                width: 250px;
+                height: 70px;
+                border-radius: 75px;
+                background: linear-gradient(90deg,#0071b9, #1d2c5e);
+                display: flex;
+                align-items: center;
+                border: none;
+                padding: 5px;;
+                cursor: pointer;
+                overflow: hidden;
+                transition: width 0.4s ease;
+
+                img {
+                    height: 60px;
+                    
+                }
+                h2 {
+                    text-align: center;
+                    color: #c7a008;
+                    font-size: 24px;
+                    font-weight: medium;
+                    margin-left: 10px;
+                    text-decoration: none;
+                    text-wrap: nowrap;
+                }
+            }
+        }
+
+        .grid {
+            position: absolute;
+            top: 0;
+            
+            background-color: #1D2C5E; 
+            z-index: 3;
+            transition: left 0.4s ease;
+            left: -385px;
+            
+            .list {
+                list-style: none;
+                gap: 14px;
+                margin: auto;
+                grid-template-columns: repeat(2, 1fr);
+                padding: 0;
+                overflow: hidden;
+                
+                
+                li {
+                   
+                    color: #fff;
+                    border-radius: 0.4rem;
+                    position: relative;
+                    width: 160px;
+                    height: 130px;
+                    border-radius: 10px;
+                    transition: all 0.4s ease-in;
+                    display: flex;
+                    margin: 0;
+                    overflow: hidden;
+                    padding: 10px;
+
+                    .features {
+                        width: 50%;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: start;
+
+                        .name {
+                            text-wrap: nowrap;
+                            
+                            width: 200%;
+                        }
+
+                        .types {
+                            width: 60px;
+                            height: 20px;
+                            background-color: #fff5;
+                            border-radius: 50px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-size: 14px;
+                            font-weight: 300;
+                            margin-block: 5px;
+                        }
+                    }
+                    
+                    .sprites {
+                        width: 50%;
+                        display: flex;
+                        align-items: end;
+                        img {
+                            scale: 1.2;
+                            margin-bottom: 3px;
+                            position: relative;
+                            z-index: 5;
+
+                        }
+                        .vector {
+                            position: relative;
+                            z-index: 0;
+                            left: -50px;
+                        }
+
+                    }
+                   
+                }
+            }
+            .title {
+                background: linear-gradient( #cff83c, #afc718);
+                background-clip: text;
+                -webkit-text-fill-color: transparent;
+                font-size: 36px;
+                font-weight: bold;
+                align-self: start;
+                margin-left: 15px;
+            }
+
+           
+            .generation {
+                text-align: center;
+                width: 207px;
+                height: 32px;
+                border-radius: 20px;
+                background: linear-gradient(90deg, #cdfc41, #d6eb18);
+                color: #000000;
+                font-weight: bold;
+                margin-top: 10px;
+                border: none;
+                font-size: 1rem;
+            }
+            
+            .landscape {
+                
+                overflow-x: hidden;
+                width: 334px;
+                height: 562px ;
+                margin-bottom: 30px;
+                display: flex;
+                padding: 0;
+                align-items: center;
+                justify-content: center;
+                background-color: #1D2C5E; 
+                
+            }
+
+            .loader {
+                width: 380px;
+            }
+            
+        }
+        
+        .stats {
+            position: absolute;
+            top: 0;
+            padding: 0;
+            margin: 0;
+            transition: right 0.4s ease;
+            right: -385px;
+            .status {
+                background: url(images/Frame\ 2.svg) no-repeat center;
+                width: 100%;
+                height: 100%;
+
+                .pkname {
+                    font-weight: bold;
+                    font-size: 42px;
+                    color: #Fff;
+                    position: absolute;
+                    top: 30px;
+                    right: 20px;
+                }
+                
+                ul.pktypes {
+                    display: flex;
+                    position: absolute;
+                    left: 20px;
+                    top: 93px;
+                    color: #fff;
+                    
+                    .type {
+                        
+                        font-size: 13px;
+                        height: 20px;
+                        background-color: #fff6 ;
+                        border-radius: 50px;
+                        padding-inline: 20px;
+                        margin-right: 5px;
+                        list-style: none;
+                        
+                    }
+                }
+
+                .pknumber {
+                    color: #010101;
+                    font-size: 14px;
+                    font-weight: 500;
+                    position: absolute;
+                    right: 34px;
+                    top: 86px;
+                }
+
+                .pkimg {
+                    margin: auto;
+                    display: flex;
+                    width: 240px;
+                    position: absolute;
+                    bottom: 48%;
+                    left: 50%;
+                    transform: translateX(-50%);
+                }
+                .flavortext {
+                    font-size: 10px;
+                    position: absolute;
+                    bottom: 6px;
+                    width: 380px;
+                    text-align: center;
+                    padding: 10px;
+                    max-height: 70px ;
+
+                }
+                .statnumber {
+                    min-height:192px ;
+                    position: absolute;
+                    bottom: 80.5px ;
+                    left: 72px;
+                    .stnum {
+                        font-size: 20px;
+                        color: #000;
+
+
+                    }
+                }
+                .quantities {
+                    width: 256.59px;
+                    min-height: 192px;
+                    position: absolute;
+                    right: 10px;
+                    bottom: 90px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+
+
+
+                    .bar {
+                        height: 12px;
+                        border-radius: 100px;
+                        background-color: blue;
+                        width: 0;
+                        transition: width 1s ease-in;
+                    }
+
+                }
+
+            }
+        }
+
+        .leftarrow {
+            position: absolute;
+            height: 30px;
+            background-color: transparent;
+            left: 15px;
+            top: 8px;
+            border: none;
+            
+            &:hover {
+                cursor: pointer;
+            }
+            &:active {
+                scale: 1.2;
+            }
+        }
+        .screen {
+            height: 100%;
+            width: 100%;
+            border-radius: 20px;
+            align-items: center;
+            justify-content: space-between;
+            display: flex;
+            flex-direction: column;
+            
+        }
+        .hidden {
+            display: none;
+            
+        }
+        .background {
+           object-fit: cover;
+           overflow: hidden;
+           background-color: #1D2C5E; 
+}
+        
+    </style>
+</head>
+<body class="js"> 
+    <nav>
+        <a href="../08-javascript/index.html">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#ffffff" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
+        </a>
+    </nav>
+     <main>
+        <header>
+            <h1><strong>17-Pokedex-api</strong></h1> 
+            <p>
+                Fetch and display data from the Pokedex API.
+            </p>
+        </header>
+        <section class="">
+            <div class="pokedesk">
+                <div class="home screen">
+
+                    <img class="logo" src="images/International_Pokémon_logo.svg.png" alt="">
+                    
+                    <video class="gif" width="380" autoplay muted loop>
+                        <source src="images/snorlax_converted.mp4" type="video/mp4" >
+                        
+                    </video>
+
+                    
+
+                    <button class="started">
+                        <img class="rotar" src="images/pokeball-pokemon-svgrepo-com.svg" alt="">
+                        <h2 href="">
+                            GO
+                        </h2>
+                    </button>
+                </div>
+                
+                <div class="grid screen">
+                    <button class="leftarrow"><img src="images/leftarrow.png" alt=""></button>
+                    <select name="" id="" class="generation" >
+                        <option value="8">Select Generation</option>
+                        <option value="0">First Generation</option>
+                        <option value="1">Second Generation</option>
+                        <option value="2">Third Generation</option>
+                        <option value="3">Fourth Generation</option>
+                        <option value="4">Fifth Generation</option>
+                        <option value="5">Sixth Generation</option>
+                        <option value="6">Seventh Generation</option>
+                        <option value="7">Eighth Generation</option>
+                    </select>
+                    <h2 class="title" >Pokedex</h2>
+                    <div class="landscape">
+                        <img class="loader hidden" src="images/umbreon-loading.gif" alt="Loader">
+                        <img class="background" src="images/channels4_profile.jpg" alt="" >
+                        <ul class="list hidden">
+                            
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="stats screen">
+                    
+                    <div class="status">
+                        
+                        <button class="leftarrow backtogrid"><img src="images/salida-de-emergencia.png" alt=""></button>
+                        <h2 class="pkname">Name</h2>
+                        <ul class="pktypes">
+                            
+
+                        </ul>
+                        <h4 class="pknumber">#001</h4>
+                        <img class="pkimg"  ">  
+                        <div class="statnumber">
+                            <h2 class="stnum hpnum">40</h2>
+                            <h2 class="stnum atknum">40</h2>
+                            <h2 class="stnum defnum">40</h2>
+                            <h2 class="stnum satknum">40</h2>
+                            <h2 class="stnum sdefnum">40</h2>
+                            <h2 class="stnum spnum">40</h2>
+                            <h2 class="stnum totalnum">40</h2>
+                            
+                        </div>
+                        <div class="quantities">
+                            <div class="hpbar bar"></div>
+                            <div class="atk bar"></div>
+                            <div class="def bar"></div>
+                            <div class="satk bar"></div>
+                            <div class="sdef bar"></div>
+                            <div class="sp bar"></div>
+                            <div class="total bar"></div>
+                        </div>
+                        <p class="flavortext"></p>
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+    </main>
+
+    <script>
+        // Elements
+        const list       = document.querySelector('.list')
+        const generation = document.querySelector('.generation')
+        const loader     = document.querySelector('.loader')
+        const btnStarted = document.querySelector('.started')
+        const rotar      = document.querySelector('.rotar')
+        const gif        = document.querySelector('.gif')
+        const background = document.querySelector('.background')
+        const home       = document.querySelector('.home')
+        const grid       = document.querySelector('.grid')
+        const stats      = document.querySelector('.stats')
+        const btnBack    = document.querySelector('.leftarrow')
+        const btnToGrid  = document.querySelector('.backtogrid')
+        const flavortext = document.querySelector('.flavortext')
+        const quantities = document.querySelectorAll('.bar')
+        
+
+        const generations = {
+           generation: [
+            {start : 1, end: 151},
+            {start : 152, end: 251},
+            {start : 252, end: 386},
+            {start : 387, end: 493},
+            {start : 494, end: 649},
+            {start : 650, end: 721},
+            {start : 722, end: 809},
+            {start : 810, end: 890},
+           ]
+        }
+
+        // Events 
+        generation.addEventListener('change', function(event){
+            const start  = generations.generation[this.value].start
+            const end    = generations.generation[this.value].end
+            loadPokemon(start, end)
+            
+        })
+
+        btnStarted.addEventListener('click', (e) => {
+            generation.value = 8
+            gif.play()
+            btnStarted.style.width = '70px'
+            rotar.classList.add('rotacion')
+            setTimeout(() => {
+                grid.style.zIndex = '3'
+                grid.style.left = 0
+                home.style.zIndex = '1'
+                home.style.left = '-385px'
+                rotar.classList.remove('rotacion')
+
+            }, 9000);
+            
+        })
+
+        btnBack.addEventListener('click', () => {
+                btnStarted.style.width = '250px'
+                
+                grid.style.left = '-385px'
+                grid.style.zIndex = '2'
+                home.style.zIndex = '3'
+                home.style.left = '0'
+
+        })
+
+        btnToGrid.addEventListener('click', () => {
+                grid.style.left = '0'
+                grid.style.zIndex = '3'
+                stats.style.right = '-385px'
+        })
+
+        // Function
+         const loadPokemon = async (start, end) => {
+            list.style.display = 'none'
+            list.innerHTML = ``
+            loader.classList.remove('hidden')
+            background.classList.add('hidden')
+            setTimeout(()=>{
+                loader.classList.add('hidden')
+                list.style.display = 'grid'
+            },5000)
+            for(let pk = start ; pk <= end; pk++){
+                const url      = `https://pokeapi.co/api/v2/pokemon/${pk}`   
+                const response = await fetch(url)
+                const data     = await response.json()
+                let imgPk = data.id
+                if(pk < 100){
+                     imgPk    = (pk < 10 ) ? "00"+data.id : "0"+data.id
+                }
+                
+
+
+                
+                const colors = {
+                    'yellow' : '#E0B347',
+                    'red' : '#B85757',
+                    'blue' : '	#4D84B7',
+                    'green' : '#6A9E6D',
+                    'black' : '#4A4A4A',
+                    'brown' : '#A78B7C',
+                    'purple' : '#9B6FB2',
+                    'white' : '#e7e5e4',
+                    'pink' : '#D68CA1',
+                    'gray' : '#B4B4B4',
+
+                }
+                
+                
+                const speciesFeatures  = data.species.url
+                const featuresResponse = await fetch (speciesFeatures)
+                const features         = await featuresResponse.json()
+                const colorName        = features.color.name
+          
+                
+                list.innerHTML += `<li style="background-color: ${colors[colorName]};">
+                        <div class="features"> 
+                            <h2 class='name'>${data.name}</h2>
+                            ${data.types.map(t => `<h5 class="types">${t.type.name}</h5>`).join('')}
+                            <p class='hidden id'>${imgPk}</p>
+                            <p class='flavortext hidden'>${features.flavor_text_entries[0].flavor_text}  </p>
+                            <h5 class='hph hidden'> ${data.stats[0].base_stat} <h5>
+                            <h5 class='attack hidden'> ${data.stats[1].base_stat} <h5>
+                            <h5 class='defense hidden'> ${data.stats[2].base_stat} <h5>
+                            <h5 class='sattack hidden'> ${data.stats[3].base_stat} <h5>
+                            <h5 class='sdefense hidden'> ${data.stats[4].base_stat} <h5>
+                            <h5 class='speed hidden'> ${data.stats[5].base_stat} <h5>
+
+                        </div>
+                        <div class="sprites">
+                            <img  src="https://www.serebii.net/swordshield/pokemon/${imgPk}.png">   
+                            <img class="vector" src="images/pokeball_vector 2.svg" alt=""> 
+                        </div>
+                    </li>
+                    `
+                
+
+                   
+
+
+                
+                    const items = document.querySelectorAll('.list li')
+           
+
+                    items.forEach(pokemon => {
+                        const bgColor = window.getComputedStyle(pokemon).backgroundColor;
+                        if (bgColor === 'rgb(231, 229, 228)') {
+                            
+                           const typeInside = pokemon.querySelectorAll('.types')
+                           const nameInside = pokemon.querySelector('.name')
+
+                           nameInside.style.color = 'gray'
+
+                            typeInside.forEach(type => {
+                                type.style.color = 'gray'
+                            })
+                        }
+
+                        const pkname = document.querySelector('.pkname')
+                        const pktype = document.querySelector('.pktypes')
+                        const pknumber = document.querySelector('.pknumber')
+                        pokemon.style.cursor = 'pointer'
+                        pokemon.addEventListener('click', () => {
+
+
+                            flavortext.textContent = pokemon.querySelector('.flavortext').textContent
+                            stats.style.zIndex = '4'
+                            stats.style.right = '0'
+                            stats.style.backgroundColor = pokemon.style.backgroundColor
+                            let pktypeinside = pokemon.querySelectorAll('.types')
+                            
+                            pktype.innerHTML = Array.from(pktypeinside).map(t => `<li class="type">${t.textContent}</li>`).join('')
+
+                            
+
+                            let fullstat = 300;
+                            let hp       = parseInt(pokemon.querySelector('.hph').textContent);                     
+                            let attack   = parseInt(pokemon.querySelector('.attack').textContent);
+                            let defense  = parseInt(pokemon.querySelector('.defense').textContent);
+                            let sattack  = parseInt(pokemon.querySelector('.sattack').textContent);
+                            let sdefense = parseInt(pokemon.querySelector('.sdefense').textContent);
+                            let speed    = parseInt(pokemon.querySelector('.speed').textContent);
+                            let sum   = hp + attack + defense + sattack + sdefense + speed;
+                            let total = Math.round(sum / 6)
+
+                            document.querySelector('.hpbar').style.width = `${Math.round(hp * 100 / fullstat)}%`;
+                            document.querySelector('.atk').style.width   = `${Math.round(attack * 100 / fullstat)}%`;
+                            document.querySelector('.def').style.width   = `${Math.round(defense * 100 / fullstat)}%`;
+                            document.querySelector('.satk').style.width  = `${Math.round(sattack * 100 / fullstat)}%`;
+                            document.querySelector('.sdef').style.width  = `${Math.round(sdefense * 100 / fullstat)}%`;
+                            document.querySelector('.sp').style.width    = `${Math.round(speed * 100 / fullstat)}%`;
+                            document.querySelector('.total').style.width = `${Math.round(total * 100 / fullstat)}%`;
+
+                            quantities.forEach(bar => {
+                            
+                            let width = parseInt(bar.style.width);
+
+                            if (width >= 20) {
+                                bar.style.backgroundColor = '#5b8a72'
+                            }else {
+                                bar.style.backgroundColor = '#b14a4a'
+                            }
+                        });
+                            
+
+                            
+
+                            document.querySelector('.hpnum').textContent = hp
+                            document.querySelector('.atknum').textContent = attack
+                            document.querySelector('.defnum').textContent = defense
+                            document.querySelector('.satknum').textContent = sattack
+                            document.querySelector('.sdefnum').textContent = sdefense
+                            document.querySelector('.spnum').textContent = speed
+                            document.querySelector('.totalnum').textContent = total
+
+                            
+                            
+                            pkname.textContent = pokemon.querySelector('.name').textContent
+                            pknumber.textContent = `
+                            #${pokemon.querySelector('.id').textContent}
+                            `
+                            const pkimg = document.querySelector('.pkimg')
+
+                            pkimg.setAttribute('src',`https://www.serebii.net/swordshield/pokemon/${pokemon.querySelector('.id').textContent}.png`)
+
+                            if (stats.style.backgroundColor === 'rgb(231, 229, 228)') {
+                                pkname.style.color = 'gray'
+                                pktype.style.color = 'gray'
+                                pknumber.style.color = 'gray'
+                                
+                            }else {
+                                pkname.style.color = '#fff'
+                                pktype.style.color = '#fff'
+                                pknumber.style.color = '#fff'
+                            }
+
+                           
+                            
+                        })
+                    })
+
+                }   
+            }
+            
+            
+         
+
+         
+    </script>
+</body>
+</html>
