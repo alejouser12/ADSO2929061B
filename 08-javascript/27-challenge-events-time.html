@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>27-challenge-events-time</title>
+  <link rel="stylesheet" href="../css/styles.css"/>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    body {
+      height: 100vh;
+      background: #584040;
+      align-items: center;
+    }
+    .contenedor {
+        width: 380px;
+        height: 320px;
+        margin: 0 auto;
+        position: relative;
+        background: url(dino.images/fondo-desierto\ 1.svg) no-repeat;
+        background-position: center bottom;
+        background-size: cover;
+        overflow: hidden;
+    }
+   .dino {
+         width: 85px;
+         height: 88px;
+        position: absolute;
+        bottom: 42px; 
+        left: 40px;  
+        z-index: 2;
+        background: url(dino.images/dino\ 1.svg) no-repeat center / cover;
+        background-position-x: 0px;
+        
+    }
+    .cactus {
+      width: 40px;
+      height: 75px;
+      position: relative;
+      top: 210px;
+      bottom: 16px;
+      left: 600px;
+      z-index: 1;
+      background: url(dino.images/Gemini_Generated_Image_8udcuq8udcuq8udc-removebg-preview\ 1.svg) no-repeat;
+    }
+    .suelo {
+        width: 760px; 
+        height: 42px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        background: url(dino.images/piso-desierto.jpg);
+    }
+
+    .puntaje {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 10;
+        color: #d48872;
+        font-family: Verdana, sans-serif;
+        font-size: 24px;
+        font-weight: bold;
+    }
+    a {
+      text-decoration: none;
+      color: aqua;
+      width: 20px;
+      height: 25px;
+      background-color: rgb(250, 250, 250);
+      border-radius: 20%;
+      font-weight: 900;
+      font-size: medium;
+      font-family: cursive;
+    }
+  </style>
+</head>
+<body class="js">
+  <nav>
+    <a href="index.html">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+        <path fill="#ffffff"
+          d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/>
+      </svg>
+    </a>
+  </nav>
+  <main>
+    <header>
+      <h1>27-challenge-events-time</h1>
+      <p>Create time-based interactive challenges.</p>
+    </header>
+    <section>
+      <a href="https://www.figma.com/design/VANTZsFEvJwrLRzk5M6k81/Untitled?node-id=23-6&p=f&t=N0ffGNJDsoMF7Jx2-0">FIGMA</a>
+     <div class="contenedor">
+        <div class="suelo"></div>
+        <div class="dino dino-corriendo"></div>
+        <div class="puntaje">0</div>
+    </div>
+
+    </section>
+  </main>
+  <script>
+    var time = new Date();
+    var deltaTime = 0;
+
+    if (document.readyState === "complete" || document.readyState === "interactive") {
+      setTimeout(Init, 1);
+    } else {
+      document.addEventListener("DOMContentLoaded", Init);
+    }
+
+    function Init() {
+      time = new Date();
+      start();
+      Loop(); 
+      tiempo();
+    }
+
+    function Loop() {
+      deltaTime = (new Date() - time) / 1000;
+      time = new Date();
+      Update();
+      requestAnimationFrame(Loop);
+    }
+
+    var sueloY = 22;
+    var velY = 0;
+    var impulso = 800;
+    var gravedad = 2500;
+    var dinoPosY = sueloY;
+    var dinoPosx = 100;
+
+    var sueloX = 0;
+    var velEscenario = 600;
+    var gameVel = 1;
+    var puntaje = 0;
+
+    var parado = false;
+    var saltando = false;
+
+    var contenedor;
+    var dino;
+    var textoPuntaje;
+    var suelo;
+    var gameOver;
+
+    var tiempoHastaObstaculo = 0.4;
+    var tiempoObstaculoMin = 0.2;
+    var tiempoObstaculoMax = 2;
+    var obstaculoPosY = 1;
+    var obstaculos = [];
+
+    function start() {
+      gameOver = document.querySelector(".game-over");
+      suelo = document.querySelector(".suelo");
+      contenedor = document.querySelector(".contenedor");
+      textoPuntaje = document.querySelector(".puntaje");
+      dino = document.querySelector(".dino");
+      document.addEventListener("keydown", HandleKeyDown);
+    }
+
+    function HandleKeyDown(ev) {
+      if (ev.keyCode == 32) {
+        saltar();
+      }
+    }
+
+    function saltar() {
+      if (dinoPosY === sueloY) {
+        saltando = true;
+        velY = impulso;
+        dino.classList.remove("dino-corriendo");
+      }
+    }
+
+    function Update() {
+      if (parado) return;
+
+      MoverSuelo();
+      MoverDinosaurio();
+      velY -= gravedad * deltaTime;
+      DecidirCrearObstaculos();
+      MoverObstaculos();
+      DetectarColision();
+    }
+
+    function MoverSuelo() {
+      sueloX += calcularDesplazamiento();
+        suelo.style.left = -(sueloX % (suelo.clientWidth / 2)) + "px";
+    }
+
+    function calcularDesplazamiento() {
+      return velEscenario * deltaTime * gameVel;
+    }
+
+    function MoverDinosaurio() {
+      dinoPosY += velY * deltaTime;
+      if (dinoPosY < sueloY) {
+        TocarSuelo();
+      }
+      dino.style.bottom = dinoPosY + "px";
+    }
+
+    function TocarSuelo() {
+      dinoPosY = sueloY;
+      velY = 0;
+      if (saltando) {
+        dino.classList.add("dino-corriendo");
+      }
+      saltando = false;
+    }
+
+    function DecidirCrearObstaculos() {
+      tiempoHastaObstaculo -= deltaTime;
+      if (tiempoHastaObstaculo <= 0) {
+        CrearObstaculo();
+      }
+    }
+
+    function CrearObstaculo() {
+      var obstaculo = document.createElement("div");
+      contenedor.appendChild(obstaculo);
+      obstaculo.classList.add("cactus");
+      obstaculo.posX = contenedor.clientWidth;
+      obstaculo.style.left = contenedor.clientWidth + "px";
+      obstaculos.push(obstaculo); 
+      tiempoHastaObstaculo = tiempoObstaculoMin + Math.random() * (tiempoObstaculoMax - tiempoObstaculoMin) / gameVel;
+    }
+
+    function MoverObstaculos() {
+      for (var i = obstaculos.length - 1; i >= 0; i--) {
+        if (obstaculos[i].posX < -obstaculos[i].clientWidth) {
+          obstaculos[i].parentNode.removeChild(obstaculos[i]);
+          obstaculos.splice(i, 1);
+          GanarPuntos();
+        } else {
+          obstaculos[i].posX -= calcularDesplazamiento();
+          obstaculos[i].style.left = obstaculos[i].posX + "px";
+        }
+      }
+    }
+
+    function GanarPuntos() {
+      puntaje++;
+      textoPuntaje.innerText = puntaje;
+    }
+
+    function DetectarColision() {
+      for (var i = 0; i < obstaculos.length; i++) {
+        if (obstaculos[i].posX > dinoPosx + dino.clientWidth) {
+          break;
+        } else {
+          if (IsCollision(dino, obstaculos[i], 10, 10, 10, 10)) {
+            gameOverFn();
+          }
+        }
+      }
+    }
+
+    function IsCollision(a, b, paddingTop, paddingRight, paddingBottom, paddingLeft) {
+      var aRect = a.getBoundingClientRect();
+      var bRect = b.getBoundingClientRect();
+
+      return !(
+        (aRect.top + aRect.height - paddingBottom < bRect.top) ||
+        (aRect.top + paddingTop > bRect.top + bRect.height) ||
+        (aRect.left + aRect.width - paddingRight < bRect.left) ||
+        (aRect.left + paddingLeft > bRect.left + bRect.width)
+      );
+    }
+
+    function gameOverFn() {
+      Estrellarse();
+      if (gameOver) {
+        gameOver.style.display = "block";
+      }
+    }
+
+    function Estrellarse() {
+      dino.classList.remove("dino-corriendo");
+      dino.classList.add("dino-estrellado");
+      parado = true;
+    }
+
+    document.addEventListener('keyup', (e) => {
+        if((e.keyCode == 32) && parado == true){
+            window.location.reload()
+        }   
+    })
+
+    function tiempo(){
+      setTimeout(()=>{
+        velEscenario += 100
+        setTimeout(()=>{
+          velEscenario += 100
+        },5000)
+      },5000)
+    }
+
+  </script>
+</body>
+</html>
