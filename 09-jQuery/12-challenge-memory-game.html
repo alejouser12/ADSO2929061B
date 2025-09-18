@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Memoria de Motos</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+    <style>
+        section.memory-game {
+            max-width: 400px;
+            margin: 2rem auto;
+            padding: 2rem 1rem;
+            background: #f7f7f7;
+            border-radius: 1rem;
+            box-shadow: 0 2px 12px #0002;
+            background-image: url('images/fondo-motos.png');
+            background-size: cover;
+            background-position: center;
+        }
+        .game-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            color: black;
+        }
+        .memory-board {
+            display: grid;
+            grid-template-columns: repeat(4, 70px);
+            gap: 14px;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        .card {
+            width: 70px;
+            height: 100px;
+            position: relative;
+            cursor: pointer;
+            perspective: 600px;
+        }
+        .card-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transition: transform 0.4s;
+            transform-style: preserve-3d;
+        }
+        .card.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+        .card-front, .card-back {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            backface-visibility: hidden;
+            border-radius: 8px;
+        }
+        .card-front {
+            transform: rotateY(180deg);
+            z-index: 2;
+        }
+        .card-back {
+            background: #eee;
+            z-index: 1;
+        }
+        .card.matched {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+        .message {
+            text-align: center;
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            color: #2c4674;
+            font-weight: bold;
+        }
+        .timer {
+            color: #d32f2f;
+        }
+    </style>
+</head>
+<body class="jquery">
+    <main>
+        <header>
+            <h1>Juego de Memoria de Motos</h1>
+            <p style="text-align:center;">
+                Encuentra los pares de motos. ¡Pon a prueba tu memoria!
+            </p>
+        </header>
+        <section class="memory-game">
+            <div class="game-info">
+                <div>Tiempo: <span class="timer">01:00</span></div>
+                <div>Movimientos: <span class="moves">0</span></div>
+            </div>
+            <div class="memory-board"></div>
+            <div class="message"></div>
+        </section>
+    </main>
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            currentActive();
+
+      
+            const motos = [
+                {img: 'images/Rectangle 12.png', name: 'Yamaha R1'},
+                {img: 'images/Rectangle 16.png', name: 'Ducati Panigale'},
+                {img: 'images/Rectangle 17.png', name: 'Kawasaki Ninja'},
+                {img: 'images/Rectangle 18.png', name: 'BMW S1000RR'},
+                {img: 'images/Rectangle 19.png', name: 'Honda CBR'},
+                {img: 'images/Rectangle 11.png', name: 'Suzuki GSX'}
+            ];
+            let cards = [...motos, ...motos]
+                .map((moto, i) => ({...moto, id: i}))
+                .sort(() => Math.random() - 0.5);
+
+            function renderBoard() {
+                const $board = $('.memory-board');
+                $board.empty();
+                $.each(cards, function(idx, card) {
+                    $board.append(`
+                        <div class="card" data-idx="${idx}">
+                            <div class="card-inner">
+                                <div class="card-front">
+                                    <img src="${card.img}" alt="${card.name}" style="width:100%;height:100%;">
+                                </div>
+                                <div class="card-back">
+                                    <img src="images/Rectangle 27.png" alt="Tapada" style="width:100%;height:100%;">
+                                </div>
+                            </div>
+                        </div>
+                    `);
+                });
+            }
+
+            let flipped = [];
+            let lock = false;
+            let moves = 0;
+            let matchedPairs = 0;
+            let timer = 60;
+            let timerInterval;
+            let gameEnded = false;
+
+            function updateMoves() {
+                $('.moves').text(moves);
+            }
+            function updateTimer() {
+                let min = Math.floor(timer / 60);
+                let sec = timer % 60;
+                $('.timer').text(
+                    (min < 10 ? '0' : '') + min + ':' + (sec < 10 ? '0' : '') + sec
+                );
+            }
+            function showMessage(msg, color = "#2c4674") {
+                $('.message').text(msg).css('color', color);
+            }
+            function endGame(win) {
+                gameEnded = true;
+                clearInterval(timerInterval);
+                if (win) {
+                    showMessage('¡Ganaste! Encontraste todos los pares en ' + moves + ' movimientos.');
+                } else {
+                    showMessage('Se acabó el tiempo, Intenta de nuevo.', "#d32f2f");
+                    $('.card').css('pointer-events', 'none');
+                }
+            }
+            function flipCard($card, idx) {
+                if (lock || $card.hasClass('flipped') || $card.hasClass('matched') || gameEnded) return;
+                $card.addClass('flipped');
+                flipped.push(idx);
+
+                if (flipped.length === 2) {
+                    moves++;
+                    updateMoves();
+                    lock = true;
+                    const [i1, i2] = flipped;
+                    if (cards[i1].name === cards[i2].name) {
+                        setTimeout(function() {
+                            $(`.card[data-idx="${i1}"], .card[data-idx="${i2}"]`).addClass('matched');
+                            flipped = [];
+                            lock = false;
+                            matchedPairs++;
+                            if (matchedPairs === motos.length) {
+                                endGame(true);
+                            }
+                        }, 600);
+                    } else {
+                        setTimeout(function() {
+                            $(`.card[data-idx="${i1}"], .card[data-idx="${i2}"]`).removeClass('flipped');
+                            flipped = [];
+                            lock = false;
+                        }, 1000);
+                    }
+                }
+            }
+
+            renderBoard();
+
+            
+            $('.card').addClass('flipped');
+            setTimeout(function() {
+                $('.card').removeClass('flipped');
+            }, 2000);
+
+          
+            $('.memory-board').on('click', '.card', function () {
+                const idx = $(this).data('idx');
+                flipCard($(this), idx);
+            });
+
+            
+            updateTimer();
+            timerInterval = setInterval(function() {
+                if (gameEnded) return;
+                timer--;
+                updateTimer();
+                if (timer <= 0) {
+                    endGame(false);
+                }
+            }, 1000);
+        });
+
+       
+        function currentActive() {
+           
+        }
+    </script>
+</body>
+</html>
