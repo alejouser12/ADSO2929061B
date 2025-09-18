@@ -98,132 +98,147 @@
     </main>
     <script src="js/jquery-3.7.1.min.js"></script>
     <script>
-        $(document).ready(function () {
-            currentActive();
+    $(document).ready(function () {
+        currentActive();
 
-      
-            const motos = [
-                {img: 'images/Rectangle 12.png', name: 'Yamaha R1'},
-                {img: 'images/Rectangle 16.png', name: 'Ducati Panigale'},
-                {img: 'images/Rectangle 17.png', name: 'Kawasaki Ninja'},
-                {img: 'images/Rectangle 18.png', name: 'BMW S1000RR'},
-                {img: 'images/Rectangle 19.png', name: 'Honda CBR'},
-                {img: 'images/Rectangle 11.png', name: 'Suzuki GSX'}
-            ];
-            let cards = [...motos, ...motos]
-                .map((moto, i) => ({...moto, id: i}))
-                .sort(() => Math.random() - 0.5);
+        const motos = [
+            { img: 'images/Rectangle 12.png', name: 'Yamaha R1' },
+            { img: 'images/Rectangle 16.png', name: 'Ducati Panigale' },
+            { img: 'images/Rectangle 17.png', name: 'Kawasaki Ninja' },
+            { img: 'images/Rectangle 18.png', name: 'BMW S1000RR' },
+            { img: 'images/Rectangle 19.png', name: 'Honda CBR' },
+            { img: 'images/Rectangle 11.png', name: 'Suzuki GSX' }
+        ];
 
-            function renderBoard() {
-                const $board = $('.memory-board');
-                $board.empty();
-                $.each(cards, function(idx, card) {
-                    $board.append(`
-                        <div class="card" data-idx="${idx}">
-                            <div class="card-inner">
-                                <div class="card-front">
-                                    <img src="${card.img}" alt="${card.name}" style="width:100%;height:100%;">
-                                </div>
-                                <div class="card-back">
-                                    <img src="images/Rectangle 27.png" alt="Tapada" style="width:100%;height:100%;">
-                                </div>
-                            </div>
-                        </div>
-                    `);
-                });
-            }
-
-            let flipped = [];
-            let lock = false;
-            let moves = 0;
-            let matchedPairs = 0;
-            let timer = 60;
-            let timerInterval;
-            let gameEnded = false;
-
-            function updateMoves() {
-                $('.moves').text(moves);
-            }
-            function updateTimer() {
-                let min = Math.floor(timer / 60);
-                let sec = timer % 60;
-                $('.timer').text(
-                    (min < 10 ? '0' : '') + min + ':' + (sec < 10 ? '0' : '') + sec
-                );
-            }
-            function showMessage(msg, color = "#2c4674") {
-                $('.message').text(msg).css('color', color);
-            }
-            function endGame(win) {
-                gameEnded = true;
-                clearInterval(timerInterval);
-                if (win) {
-                    showMessage('¡Ganaste! Encontraste todos los pares en ' + moves + ' movimientos.');
-                } else {
-                    showMessage('Se acabó el tiempo, Intenta de nuevo.', "#d32f2f");
-                    $('.card').css('pointer-events', 'none');
-                }
-            }
-            function flipCard($card, idx) {
-                if (lock || $card.hasClass('flipped') || $card.hasClass('matched') || gameEnded) return;
-                $card.addClass('flipped');
-                flipped.push(idx);
-
-                if (flipped.length === 2) {
-                    moves++;
-                    updateMoves();
-                    lock = true;
-                    const [i1, i2] = flipped;
-                    if (cards[i1].name === cards[i2].name) {
-                        setTimeout(function() {
-                            $(`.card[data-idx="${i1}"], .card[data-idx="${i2}"]`).addClass('matched');
-                            flipped = [];
-                            lock = false;
-                            matchedPairs++;
-                            if (matchedPairs === motos.length) {
-                                endGame(true);
-                            }
-                        }, 600);
-                    } else {
-                        setTimeout(function() {
-                            $(`.card[data-idx="${i1}"], .card[data-idx="${i2}"]`).removeClass('flipped');
-                            flipped = [];
-                            lock = false;
-                        }, 1000);
-                    }
-                }
-            }
-
-            renderBoard();
-
-            
-            $('.card').addClass('flipped');
-            setTimeout(function() {
-                $('.card').removeClass('flipped');
-            }, 2000);
-
-          
-            $('.memory-board').on('click', '.card', function () {
-                const idx = $(this).data('idx');
-                flipCard($(this), idx);
-            });
-
-            
-            updateTimer();
-            timerInterval = setInterval(function() {
-                if (gameEnded) return;
-                timer--;
-                updateTimer();
-                if (timer <= 0) {
-                    endGame(false);
-                }
-            }, 1000);
+        let cards = $.map([...motos, ...motos], function (moto, i) {
+            return $.extend({}, moto, { id: i });
         });
 
-       
-        function currentActive() {
-           
+        cards = cards.sort(function () {
+            return Math.random() - 0.5;
+        });
+
+        function renderBoard() {
+            const $board = $('.memory-board');
+            $board.empty();
+            $.each(cards, function (idx, card) {
+                $board.append(`
+                    <div class="card" data-idx="${idx}">
+                        <div class="card-inner">
+                            <div class="card-front">
+                                <img src="${card.img}" alt="${card.name}" style="width:100%;height:100%;">
+                            </div>
+                            <div class="card-back">
+                                <img src="images/Rectangle 27.png" alt="Tapada" style="width:100%;height:100%;">
+                            </div>
+                        </div>
+                    </div>
+                `);
+            });
         }
-    </script>
+
+        let flipped = [];
+        let lock = false;
+        let moves = 0;
+        let matchedPairs = 0;
+        let timer = 60;
+        let timerInterval;
+        let gameEnded = false;
+
+        function updateMoves() {
+            $('.moves').text(moves);
+        }
+
+        function updateTimer() {
+            let min = Math.floor(timer / 60);
+            let sec = timer % 60;
+            $('.timer').text(
+                (min < 10 ? '0' : '') + min + ':' + (sec < 10 ? '0' : '') + sec
+            );
+        }
+
+        function showMessage(msg, color = "#2c4674") {
+            $('.message').text(msg).css('color', color);
+        }
+
+        function endGame(win) {
+            gameEnded = true;
+            window.clearInterval(timerInterval);
+            if (win) {
+                showMessage('¡Ganaste! Encontraste todos los pares en ' + moves + ' movimientos.');
+            } else {
+                showMessage('Se acabó el tiempo, Intenta de nuevo.', "#d32f2f");
+                $('.card').css('pointer-events', 'none');
+            }
+        }
+
+        function flipCard($card, idx) {
+            if (lock || $card.hasClass('flipped') || $card.hasClass('matched') || gameEnded) return;
+            $card.addClass('flipped');
+            flipped.push(idx);
+
+            if (flipped.length === 2) {
+                moves++;
+                updateMoves();
+                lock = true;
+                const i1 = flipped[0], i2 = flipped[1];
+                if (cards[i1].name === cards[i2].name) {
+                    $.delay(600, function () {
+                        $(`.card[data-idx="${i1}"], .card[data-idx="${i2}"]`).addClass('matched');
+                        flipped = [];
+                        lock = false;
+                        matchedPairs++;
+                        if (matchedPairs === motos.length) {
+                            endGame(true);
+                        }
+                    });
+                } else {
+                    $.delay(1000, function () {
+                        $(`.card[data-idx="${i1}"], .card[data-idx="${i2}"]`).removeClass('flipped');
+                        flipped = [];
+                        lock = false;
+                    });
+                }
+            }
+        }
+
+        
+        renderBoard();
+
+        
+        $('.card').addClass('flipped');
+        $.delay(2000, function () {
+            $('.card').removeClass('flipped');
+        });
+
+        
+        $('.memory-board').on('click', '.card', function () {
+            const idx = $(this).data('idx');
+            flipCard($(this), idx);
+        });
+
+        
+        updateTimer();
+        timerInterval = window.setInterval(function () {
+            if (gameEnded) return;
+            timer--;
+            updateTimer();
+            if (timer <= 0) {
+                endGame(false);
+            }
+        }, 1000);
+    });
+
+    function currentActive() { }
+    
+    
+    $.delay = function (time, callback) {
+        return $('<div>').delay(time).queue(function (next) {
+            callback();
+            next();
+        });
+    };
+</script>
+
 </body>
 </html>
