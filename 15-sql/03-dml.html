@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>03-dml</title>
+     <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="sql"> 
+     <nav>
+        <a href="index.html">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#ffffff" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg> 
+            
+        </a>
+     </nav>
+    <main>
+        <header>
+            <h1>03-dml</h1>
+            <p>
+              Data manipulation lenguaje.
+            </p>
+        </header>
+        <section>
+            <h3>INSERT INTO (ShortUsed)</h3>
+            <textarea>INSERT INTO gyms VALUES (DEFAULT , 'Mikan');
+                INSERT INTO trainers VALUES (
+                DEFAULT, "Ash Ketchum", 2, 1);
+
+                INSERT INTO trainers VALUES ( 
+                DEFAULT, "Misty", 4, 2);
+
+                INSERT INTO trainers VALUES ( 
+                DEFAULT, "Brok", 6, 2);
+            </textarea>
+
+            <h3>INSERT INTO (Long Form)</h3>
+            <textarea>INSERT INTO gyms (id, name) VALUES (DEFAULT, 'fuchsia')
+
+                INSERT INTO trainers (id, name, level, gym_id) VALUES ( 
+                DEFAULT, "Serena", 4, 2);
+
+                INSERT INTO trainers (id, name, level, gym_id) VALUES ( 
+                DEFAULT, "Oak", 9, 1);
+            </textarea>
+            
+            <h3>SELECT ALL pokemons</h3>
+            <textarea>SELECT * FROM pokemons;</textarea>
+
+            <h3>SELECT specific COLUMNS</h3>
+            <textarea>SELECT name, type FROM pokemons;</textarea>
+
+            <h3>SELECT COLUMNS DISTINCTS  </h3>
+            <textarea>SELECT DISTINCT type FROM pokemons;</textarea>
+
+            <h3>SELECT WITH CONDITION (OR)</h3>
+            <textarea>SELECT name, type FROM pokemons WHERE type = 'Electric' OR type 'Water';</textarea>
+
+            <h3>SELECT WITH CONDITION (AND)</h3>
+            <textarea>SELECT name, type FROM pokemons WHERE trainer_id = 2 AND type 'Water';</textarea>
+
+            <h3>SELECT WITH CONDITION (>)</h3>
+            <textarea>SELECT name, type, strength FROM pokemons WHERE strength = > 1000;</textarea>
+
+            <h3>SELECT WITH CONDITION (<>)</h3>
+            <textarea>SELECT name, type FROM pokemons WHERE type = <> 'Water';</textarea>
+
+            <h3>SELECT WITH CONDITION (BETWEEN)</h3>
+            <textarea>SELECT name, type, speed FROM pokemons WHERE speed = BETWEEN 50 AND 100;</textarea>
+
+            <h3>SELECT ORDER BY (ASC)</h3>
+            <textarea>SELECT name, type, speed FROM pokemons WHERE type = 'Water' ORDER BY id ASC;</textarea>
+
+            <h3>SELECT ORDER BY (DESC)</h3>
+            <textarea>SELECT name, type, speed FROM pokemons WHERE type = 'Water' ORDER BY id DESC;</textarea>
+
+            <h3>SELECT LIMIT</h3>
+            <textarea>SELECT name, type FROM pokemons LIMIT 5</textarea>
+
+            <h3>SELECT OFFSET</h3>
+            <textarea>SELECT name, type FROM pokemons LIMIT 5 OFFSET 5</textarea>
+
+            <h3>SELECT SERCH (LIKE)</h3>
+            <textarea>SELECT id, name, type FROM pokemons WHERE LIKE "%AS%"</textarea>
+
+            <h3>SELECT CHALLENGE</h3>
+            <small> List pokemons type Water average speed </small>
+            <textarea>SELECT name, type, speed, (strength + stamina + speed + accuracy) AS TOTAL FROM pokemons;</textarea>
+
+        </section>
+
+    </main>
+</body>
+</html>

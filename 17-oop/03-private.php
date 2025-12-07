@@ -1,0 +1,48 @@
+<?php
+
+    $tittle = "03 - Private";
+    $descripcion = "Restricts property or method access to only within its class.";
+
+include 'template/header.php';
+    echo '<section>';
+
+    class RenderTable {
+        private $nr; # Number of Rows
+        private $nc; # Number of Columns
+
+        public function __construct($nr, $nc) {
+            $this->nr = $nr;
+            $this->nc = $nc;
+
+            // Access ti private methods
+            $this->starTable();
+            $this->bodyTable();
+            $this->endTable();
+        }
+
+        private function starTable() {
+            echo "<table>";
+        }
+        private function bodyTable() {
+            echo "<h3> Table ({$this->nr} x {$this->nc}) </h3>";
+            for($r = 1; $r <= $this->nr; $r++) {
+                echo "<tr>";
+                for($c = 1; $c <= $this->nc; $c++) {
+                    echo "<td>f {$r} - c {$c}</td>";
+                }
+                echo "</tr>";
+            }
+        }
+        private function endTable() {
+            echo  "</table>";
+        }
+    }
+
+    $tbl = new RenderTable(5, 5);
+    $tbl = new RenderTable(3, 8);
+    $tbl = new RenderTable(2, 2);
+
+
+    echo '</section>';
+
+include 'template/footer.php';
